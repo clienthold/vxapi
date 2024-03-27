@@ -2,6 +2,12 @@
 
 [virus.exchange](https://virus.exchange/) wrapper for python
 
+# Installation
+
+```
+pip install vxapi
+```
+
 # Usage
 
 ```
