@@ -7,7 +7,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="vxapi",
-    version="1.0",
+    version="1.1",
 
     description="virus.exchange wrapper for python",
     long_description=long_description,

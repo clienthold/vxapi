@@ -1,5 +1,5 @@
 from .vxapi import (vxresponse, vxapi)
-from .exceptions import (Unauthorized, Empty)
+from .exceptions import (Unauthorized, Nothing)
 
-__author__ = "pupkindev"
-__version = "1.0"
+__author__ = "clienthold"
+__version = "1.1"

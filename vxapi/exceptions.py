@@ -1,5 +1,5 @@
 class Unauthorized(Exception):
     pass
 
-class Empty(Exception):
+class Nothing(Exception):
     pass
