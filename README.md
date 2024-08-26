@@ -2,7 +2,7 @@
 
 **[virus.exchange](https://virus.exchange/)** wrapper for python
 
-# Installation
+# 📥 Installation
 
 ```
 pip install vxapi
@@ -11,7 +11,7 @@ pip install vxapi
 > [!NOTE]
 > Get your API key **[here](https://virus.exchange/users/settings)**
 
-# Usage
+# ▶️ Usage
 
 ```
 import vxapi
