@@ -1,35 +1,85 @@
 # 💽 VXAPI
 
-**[virus.exchange](https://virus.exchange/)** wrapper for python
+[![PyPI version](https://img.shields.io/pypi/v/vxapi.svg)](https://pypi.org/project/vxapi/)
+[![Downloads](https://img.shields.io/pypi/dm/vxapi.svg)](https://pypi.org/project/vxapi/)
 
-# 📥 Installation
+**Python wrapper for the [Virus.Exchange](https://virus.exchange/) API** to fetch malware sample metadata and download malicious files for analysis.
 
-```
+## 📋 Table of Contents
+
+* [🔍 Features](#-features)
+* [💾 Installation](#-installation)
+* [🚀 Quick Start](#-quick-start)
+* [🛠️ Usage](#️-usage)
+
+## 🔍 Features
+
+* Retrieve sample metadata (MD5, SHA256, SHA512, type, size, first seen)
+* Generate direct download links for malware samples
+* Lightweight and easy-to-use Python interface
+* Built-in error handling and status checks
+
+## 💾 Installation
+
+Install from PyPI:
+
+```bash
 pip install vxapi
 ```
 
-> [!NOTE]
-> Get your API key **[here](https://virus.exchange/users/settings)**
+Obtain your API key on the [Virus.Exchange settings page](https://virus.exchange/users/settings).
 
-# ▶️ Usage
+## 🚀 Quick Start
 
+```python
+from vxapi import VXAPI
+
+# Initialize client
+client = VXAPI('YOUR_API_KEY')
+
+# Fetch a sample by SHA256
+sample = client.get_sample('9f7b4bd7f9b3dff55e97516a19905cc6af88bae1817f1ad6e5e3e2ca7737f3dc')
+
+print(f"MD5:           {sample.md5}")
+print(f"SHA256:        {sample.sha256}")
+print(f"SHA512:        {sample.sha512}")
+print(f"Type:          {sample.type or 'Unknown'}")
+print(f"Size:          {sample.size} bytes")
+print(f"First seen:    {sample.first_seen}")
+print(f"Download link: {sample.download_link}")
 ```
-import vxapi
 
-vx = vxapi.vxapi("ENTER YOUR API KEY")
-sample = vx.get_sample("9f7b4bd7f9b3dff55e97516a19905cc6af88bae1817f1ad6e5e3e2ca7737f3dc")
+## 🛠️ Usage
 
-print(sample.md5)
-> ffdceadfc3973b02f15c0106122c7490
-print(sample.sha256)
-> 9f7b4bd7f9b3dff55e97516a19905cc6af88bae1817f1ad6e5e3e2ca7737f3dc
-print(sample.sha512)
-> a33fce3dcb3eb95a638b290757b3a613ca6a125ea324512de40658c62f7a0611775d5d802a6c4d45850c9a25974c2d5f279fd2f6b4ed75d11dc74e8c6f77111a
-print(sample.type)
-> None
-print(sample.size)
-> 131072
-print(sample.first_seen)
-> 2024-03-25 07:20:13+00:00
-print(sample.download_link)
-> https://s3[.]us-east-1[.]wasabisys[.]com/vxugmwdb/ ...
+### Initialization
+
+```python
+from vxapi import VXAPI
+client = VXAPI('<YOUR_API_KEY>')
+```
+
+### Methods
+
+* `get_sample(identifier: str) -> Sample`
+
+  * **identifier**: SHA256, SHA1, or MD5 hash of the sample.
+  * **returns**: a `Sample` object with properties:
+
+    * `md5`, `sha1`, `sha256`, `sha512`
+    * `type`: file type if detected
+    * `size`: file size in bytes
+    * `first_seen`: timestamp of first sighting
+    * `download_link`: URL to download the sample
+
+### Example
+
+```python
+# Query a list of hashes
+hashes = ['abc123...', 'def456...']
+for h in hashes:
+    try:
+        s = client.get_sample(h)
+        print(f"{h}: {s.size} bytes, seen {s.first_seen}")
+    except Exception as e:
+        print(f"Error fetching {h}: {e}")
+```
